@@ -1,3 +1,2 @@
-let () = 
-    print_endline "";
-    Mist.main ()
+let () = Mist.main ()
+
