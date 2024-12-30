@@ -1,3 +1,4 @@
 (library
- (libraries tyxml cmarkit)
+ (libraries tyxml cmarkit dream)
+ (preprocess (pps tyxml-ppx))
  (name mist))

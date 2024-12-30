@@ -12,3 +12,4 @@ cases-exp-indent=4
 exp-grouping = preserve
 let-binding-spacing = double-semicolon
 margin = 100
+parse-docstrings=false
