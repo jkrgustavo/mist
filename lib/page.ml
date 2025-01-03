@@ -81,6 +81,29 @@ let index_page dir =
     | _ -> failwith "Attempt to create an index page from a File!"
 ;;
 
+let error_template _error _debug_info suggested_response =
+    let status = Dream.status suggested_response in
+    let code = Dream.status_to_int status in
+    let reason = Dream.status_to_string status in
+    let error_title = Printf.sprintf "ERROR %i: %s" code reason in
+
+
+    let cont =
+        let open Tyxml in
+        Html.([%html "
+            <html>
+                <head><title>"(txt "ERROR")"</title></head>
+                <body>
+                    <h1>"[txt error_title ]"</h1>
+                </body>
+            </html>
+        "])
+    in
+    Dream.set_header suggested_response "Content-Type" Dream.text_html;
+    Dream.set_body suggested_response (elt_to_string cont);
+    Lwt.return suggested_response
+;;
+
 let rec fs_to_page ?(parent = None) fs =
     let open Files in
     match fs with

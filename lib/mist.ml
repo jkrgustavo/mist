@@ -1,7 +1,6 @@
-open Files
-open Page
 
 let rec create_routes pgs =
+    let open Page in
     match pgs with
     | Page (title, html) ->
         [ Dream.get title (fun _ -> Dream.html html) ]
@@ -11,6 +10,8 @@ let rec create_routes pgs =
 ;;
 
 let to_pages filesys =
+    let open Files in
+    let open Page in
     let root =
         match filesys with
         | Dir (_, ch) -> Dir ("", ch)
@@ -29,5 +30,5 @@ let main () =
     |> create_routes
     |> Dream.router
     |> Dream.logger
-    |> Dream.run
+    |> Dream.run ~error_handler:(Dream.error_template Page.error_template)
 ;;
