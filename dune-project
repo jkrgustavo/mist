@@ -15,5 +15,5 @@
  (name mist)
  (synopsis "Serve a directory of markdown files")
  (description "Serve a website that mirrors a directory of markdown files")
- (depends ocaml dream tyxml omd))
+ (depends ocaml dream tyxml cmarkit))
 
