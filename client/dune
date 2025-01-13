@@ -1,0 +1,16 @@
+(executable
+ (name fog) 
+ (public_name fog)
+ (modes js native)
+ (libraries
+   js_of_ocaml
+   core
+   bonsai
+   js_of_ocaml-lwt
+   virtual_dom.css_gen
+   bonsai.web)
+ (preprocess
+   (pps 
+     ppx_jane 
+     ppx_css 
+     bonsai.ppx_bonsai)))

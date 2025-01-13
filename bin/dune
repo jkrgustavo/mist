@@ -1,4 +1,0 @@
-(executable
- (public_name mist)
- (name main)
- (libraries mist))
