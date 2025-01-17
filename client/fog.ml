@@ -8,24 +8,54 @@ module Route = struct
       | Post of string
   [@@deriving sexp, equal]
 
-  let to_string exp = exp |> sexp_of_t |> Sexp.to_string
+  let _to_string exp = exp |> sexp_of_t |> Sexp.to_string
 end
+
 
 let app =
     let%sub current_route, set_route = Bonsai.state Route.Home in
-    let%sub menu_button = Menu.menu_button in
-    let%arr current_route = current_route
-    and set_route = set_route
-    and menu_button = menu_button in
-    let open Vdom in
-    Node.div
-      ~attrs:[ Attr.classes [ "root" ] ]
-      [ Node.h1
-          ~attrs:[ Attr.classes [ "header" ] ]
-          [ Node.text ("The current route is: " ^ Route.to_string current_route) ]
-      ; menu_button
-      ; Menu.st_button ~label:"To Home" ~set_state:set_route ~state:Route.Home
-      ]
+    let%sub menu = Menu.menu in
+    let%sub home_page = Home_page.component ~_set_route:0 in
+    let%arr _current_route = current_route 
+    and _set_route = set_route 
+    and menu = menu
+    and home_page = home_page in
+    Vdom.Node.div ~attrs:[ Vdom.Attr.classes [ "root" ] ] [ home_page; menu ]
 ;;
 
 let () = Start.start app
+(*
+                                            ,:
+                                          ,' |
+                                         /() :
+                                      --'   /
+                                      \/ /:/
+                                      / ://_\
+                                   __/   /
+                                   )'-. /
+                                   ./  :\
+                                    /.' '
+                                  '/'
+                                  +
+                                 '
+                               `.
+                           .-"-
+                          (    |
+                       . .-'  '.
+                      ( (.   )8:
+                  .'    / (_  )
+                   _. :(.   )8P  `
+               .  (  `-' (  `.   .
+                .  :  (   .a8a)
+               /_`( "a `a. )"'
+           (  (/  .  ' )=='
+          (   (    )  .8"   +
+            (`'8a.( _(   (
+         ..-. `8P    ) `  )  +
+       -'   (      -ab:  )
+     '    _  `    (8P"Ya
+   _(    (    )b  -`.  ) +
+  ( 8)  ( _.aP" _a   \( \   *
++  )/    (8P   (88    )  )
+   (a:f   "     `"`
+*)

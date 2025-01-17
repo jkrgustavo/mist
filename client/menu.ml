@@ -44,7 +44,7 @@ let menu_closed ~set_opened =
       [ Node.text "Open Menu" ]
 ;;
 
-let menu_button =
+let menu =
     let module Mst = MenuState in
     let%sub state, set_state = Bonsai.state Mst.Closed in
     let%arr state = state and set_opened = set_state in

@@ -12,3 +12,9 @@ html, body {
 body {
     color: white;
 }
+
+.homepage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

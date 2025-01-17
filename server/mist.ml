@@ -34,7 +34,7 @@ let main_page =
         <html lang="en">
             <head>
                 <meta charset="utf-8"/>
-                <title>Bonsai Test</title>
+                <title>Mist</title>
             </head>
             <body>
                 <div id="app" class="app"></div>
