@@ -2,6 +2,9 @@ open! Core
 open! Bonsai_web
 open! Bonsai.Let_syntax
 
+(* TODO: Menu moves every other element when opened, figure out layering *)
+(* TODO: Actual navigation, don't show up on homepages *)
+
 module MenuState = struct
   type t =
       | Open
@@ -25,13 +28,13 @@ let menu_opened ~set_opened =
     let open Vdom in
     let open MenuState in
     Node.div
-      [ Node.ul
+      [ st_button ~label:"Close Menu" ~set_state:set_opened ~state:Closed
+      ; Node.ul
           [ Node.li [ Node.text "Item 1" ]
           ; Node.li [ Node.text "Item 2" ]
           ; Node.li [ Node.text "Item 3" ]
           ; Node.li [ Node.text "Item 4" ]
           ]
-      ; st_button ~label:"Close Menu" ~set_state:set_opened ~state:Closed
       ]
 ;;
 
@@ -44,7 +47,7 @@ let menu_closed ~set_opened =
       [ Node.text "Open Menu" ]
 ;;
 
-let menu =
+let component =
     let module Mst = MenuState in
     let%sub state, set_state = Bonsai.state Mst.Closed in
     let%arr state = state and set_opened = set_state in

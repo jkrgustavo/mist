@@ -1,3 +1,4 @@
+(* TODO: Use s-expressions instead of json *)
 let to_json file =
     let open Files in
     match file with
@@ -14,6 +15,7 @@ let to_json file =
         `List (List.map (fun s -> `String s) names) |> Yojson.Safe.to_string
 ;;
 
+(* TODO: Use a single route and parse the url (i.e. "localhost:8000/api:dir1-dir2-foo") *)
 let rec create_routes pgs =
     let open Files in
     match pgs with
@@ -51,7 +53,6 @@ let static_js = Dream.get "/static/**" (Dream.static "static/")
 let build_site pgs = main_page :: static_js :: create_routes pgs
 
 let () =
-    (* read_line () *)
     print_endline "";
     "dummy-fs"
     |> Files.build_tree
