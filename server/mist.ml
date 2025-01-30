@@ -37,12 +37,11 @@ let main_page =
             <head>
                 <meta charset="utf-8"/>
                 <title>Mist</title>
+                <script type="module" src="/static/js/main.js"></script>
             </head>
             <body>
-                <div id="app" class="app"></div>
-                <script src="/static/fog.bc.js"></script>
+                <div id="root" class="root"></div>
                 <link rel="stylesheet" href="/static/styles.css">
-                <!-- or main.js if using (modes (native js)) -->
             </body>
         </html>
         |})

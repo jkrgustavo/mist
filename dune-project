@@ -1,4 +1,5 @@
 (lang dune 3.17)
+(using melange 0.1)
 
 (name mist)
 
@@ -17,3 +18,10 @@
  (description "Serve a website that mirrors a directory of markdown files")
  (depends ocaml dream tyxml cmarkit))
 
+(dialect
+ (name mlx)
+ (implementation
+  (merlin_reader mlx)
+  (extension mlx)
+  (preprocess
+   (run mlx-pp %{input-file}))))

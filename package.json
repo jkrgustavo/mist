@@ -1,0 +1,12 @@
+{
+  "scripts": {
+     "bundleDev": "webpack --mode development --entry ./_build/default/client/output/client/ReactApp.js -o ./static/js"
+
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}

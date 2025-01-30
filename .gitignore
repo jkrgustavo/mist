@@ -1,4 +1,6 @@
 _build/
 dummy-fs/
 build
-static/fog.bc.js
+node_modules/
+static/js/*.js
+packa

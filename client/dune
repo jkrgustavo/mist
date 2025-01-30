@@ -1,16 +1,8 @@
-(executable
- (name fog) 
- (public_name fog)
- (modes js native)
- (libraries
-   js_of_ocaml
-   core
-   bonsai
-   js_of_ocaml-lwt
-   virtual_dom.css_gen
-   bonsai.web)
- (preprocess
-   (pps 
-     ppx_jane 
-     ppx_css 
-     bonsai.ppx_bonsai)))
+(melange.emit 
+  (alias react)
+  (target output)
+  (libraries reason-react melange.belt)
+  (modules :standard)
+  (module_systems es6)
+  (preprocess 
+    (pps melange.ppx reason-react-ppx)))
