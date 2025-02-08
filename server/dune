@@ -1,6 +1,6 @@
 (executable
  (public_name mist)
  (name mist)
- (libraries cmarkit dream yojson ppx_deriving_yojson)
+ (libraries sexplib0 sexplib cmarkit dream yojson)
  (modes exe)
- (preprocess (pps ppx_deriving_yojson)))
+ (preprocess (pps ppx_sexp_conv ppx_deriving_yojson)))

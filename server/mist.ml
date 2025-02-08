@@ -1,10 +1,27 @@
-(* TODO: Use s-expressions instead of json *)
+(* TODO: Serialize to s-exp. Currently contains a lot of unneeded information 
+    Maybe like: 
+        (file 
+            (name ...)
+            (contents ...))
+        (dir 
+            (name ...)
+            (children 
+                (file 'name')
+                (dir 'name1')
+                (dir 'name2')))
+    Prob need to make the file logic it's own library to share the code
+
+    Use Sexp lib, instead of UFile and UDir make it a record and deserialize
+    in client code using vendored lib
+*)
+
 let to_json file =
     let open Files in
+    let open Sexplib in
     match file with
     | File (name, cont) ->
-        UFile (name, Lazy.force cont) |> urgent_fs_to_yojson |> Yojson.Safe.to_string
-    | Dir (_, children) ->
+        Page { path=name; content=Lazy.force cont } |> sexp_of_page |> Sexp.to_string_mach
+    | Dir (name, children) ->
         let names =
             List.fold_left
               (fun acc -> function
@@ -12,10 +29,9 @@ let to_json file =
                 | Dir (name, _) -> Filename.basename name :: acc)
               [] children
         in
-        `List (List.map (fun s -> `String s) names) |> Yojson.Safe.to_string
+        Index { path=name; children=names } |> sexp_of_page |> Sexp.to_string_mach
 ;;
 
-(* TODO: Use a single route and parse the url (i.e. "localhost:8000/api:dir1-dir2-foo") *)
 let rec create_routes pgs =
     let open Files in
     match pgs with
