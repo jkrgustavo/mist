@@ -4,7 +4,7 @@ open Utils
 let make = () => {
     let (splash, setSplash) = React.useState(() => None);
 
-    React.useEffect(() => {
+    React.useEffect0(() => {
         module Prom = Js.Promise
 
         Fetch.fetch_text(~url="static/splash.txt")

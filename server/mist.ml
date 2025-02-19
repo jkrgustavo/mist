@@ -1,21 +1,4 @@
-(* TODO: Serialize to s-exp. Currently contains a lot of unneeded information 
-    Maybe like: 
-        (file 
-            (name ...)
-            (contents ...))
-        (dir 
-            (name ...)
-            (children 
-                (file 'name')
-                (dir 'name1')
-                (dir 'name2')))
-    Prob need to make the file logic it's own library to share the code
-
-    Use Sexp lib, instead of UFile and UDir make it a record and deserialize
-    in client code using vendored lib
-*)
-
-let to_json file =
+let to_sexp file =
     let open Files in
     let open Sexplib in
     match file with
@@ -32,14 +15,14 @@ let to_json file =
         Index { path=name; children=names } |> sexp_of_page |> Sexp.to_string_mach
 ;;
 
-let rec create_routes pgs =
+let rec create_routes fs =
     let open Files in
-    match pgs with
+    match fs with
     | File (title, html) ->
-        [ Dream.get title (fun _ -> File (title, html) |> to_json |> Dream.json) ]
+        [ Dream.get title (fun _ -> File (title, html) |> to_sexp |> Dream.json) ]
     | Dir (title, children) ->
         let index =
-            Dream.get title (fun _ -> Dir (title, children) |> to_json |> Dream.html)
+            Dream.get title (fun _ -> Dir (title, children) |> to_sexp |> Dream.html)
         in
         List.map create_routes children |> List.concat |> List.cons index
 ;;
@@ -65,12 +48,24 @@ let main_page =
 
 let static_js = Dream.get "/static/**" (Dream.static "static/")
 
-let build_site pgs = main_page :: static_js :: create_routes pgs
+let fs_data fs =
+    let open Files in
+    let open Sexplib in
+    let rec build files = 
+        match files with
+        | File (name, _) -> F (name)
+        | Dir (path, children) -> D { path; children=(List.map(fun ch -> build ch) children) }
+    in
+    Dream.get "/fs" (fun _ -> build fs |> sexp_of_fsData |> Sexp.to_string_hum |> Dream.html)
+;;
+
+
+let build_site fs = main_page :: static_js :: (fs_data fs) :: create_routes fs
 
 let () =
     print_endline "";
-    "dummy-fs"
-    |> Files.build_tree
+    Files.build_tree "dummy-fs"
+    |> Files.sort_tree
     |> build_site
     |> Dream.router
     |> Dream.logger

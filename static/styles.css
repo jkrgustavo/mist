@@ -3,7 +3,7 @@
 }
 
 html, body {
-    background-color: #1F1F1F;
+    background-color: #2C2C2C;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -18,3 +18,95 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+/*=======NAVBAR======*/
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #3F3F4F;
+    transform: translateX(-100%);
+    /* font-size: 20px; */
+    z-index: 45;
+}
+
+.navbar.open {
+    transform: translateX(0);
+}
+
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 40;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding-top: 64px;
+}
+
+.nav-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 50;
+    padding: 8px;
+    background-color: #1f2937;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+    background-color: #374151;
+}
+/*=======\NAVBAR======*/
+
+/*======DROPTREE======*/
+.droptree-children {
+    /* font-size: 20px; */
+    margin-left: 14px;
+    /* Optionally add a subtle border or line for hierarchy */
+    border-left: 1px dotted #ccc;
+    padding-left: 5px;
+}
+
+.droptree-node {
+    margin: 2px 0;
+    text-align: left;
+}
+
+.droptree-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    border-radius: 4px;
+    line-height: 1.2;
+}
+
+.droptree-label:hover {
+    background-color: #eee;
+}
+
+.droptree-toggle {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    margin-right: 5px;
+    color: #666;
+}
+
+/*======\DROPTREE======*/

@@ -1,12 +1,18 @@
 {
   "scripts": {
-     "bundleDev": "webpack --mode development --entry ./_build/default/client/output/client/ReactApp.js -o ./static/js"
-
+    "bundleDev": "webpack --mode development --entry ./_build/default/client/output/client/ReactApp.js -o ./static/js"
   },
   "dependencies": {
+    "dompurify": "^3.2.4",
+    "html-react-parser": "^5.2.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.7"
   }
 }
