@@ -4,6 +4,6 @@
   (libraries sexp utils components pages reason-react melange.belt)
   (modules :standard)
   (module_systems es6)
-  (runtime_deps ./js-bridges/parseHtml.js)
+  (runtime_deps ./js/parseHtml.js)
   (preprocess (pps melange.ppx reason-react-ppx)))
 

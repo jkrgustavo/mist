@@ -42,8 +42,7 @@ module DropTree = {
 
     module type NodeType = {
         let make: ({. "fs": FsData.t }) => React.element;
-        let makeProps: (~fs: FsData.t, ~key: string=?, unit) =>
-            {. "fs": FsData.t };
+        let makeProps: (~fs: FsData.t, ~key: string=?, unit) => {. "fs": FsData.t };
     };
 
     module rec TreeNode: NodeType = {

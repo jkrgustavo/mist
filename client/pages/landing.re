@@ -21,7 +21,7 @@ let make = () => {
 
 
     <div className="homepage">
-        <h1>{React.string("Hello world!")}</h1>
+        <h1 className="text-red-500">{React.string("Hello world!")}</h1>
 
         { // Splash screen
             switch (splash) {
