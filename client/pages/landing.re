@@ -19,7 +19,7 @@ let make = () => {
         None
     });
 
-    open Utils.Shadbindings;
+    open Shadcn;
 
     <div className="homepage">
         <h1 className="text-red-500">{React.string("Hello world!")}</h1>

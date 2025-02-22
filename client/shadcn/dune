@@ -1,7 +1,7 @@
 (library 
-  (name pages)
+  (name shadcn)
   (modes melange)
-  (libraries sexp utils components shadcn reason-react melange.belt)
+  (libraries utils reason-react melange.belt)
   (modules :standard)
   (preprocess 
     (pps melange.ppx reason-react-ppx)))
