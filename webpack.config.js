@@ -7,6 +7,12 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'static/js'),
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './client/shadcn/'),
+        },
+        extensions: ['.js', '.jsx', '.re', '.ts', '.tsx'],
+    },
     module: {
         rules: [
             {
@@ -17,6 +23,20 @@ module.exports = {
                     'postcss-loader'
                 ],
             },
+            {
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env', 
+                            '@babel/preset-react', 
+                            '@babel/preset-typescript'
+                        ],
+                    },
+                },
+            }
         ],
     },
 };

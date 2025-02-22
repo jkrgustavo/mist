@@ -19,9 +19,11 @@ let make = () => {
         None
     });
 
+    open Utils.Shadbindings;
 
     <div className="homepage">
         <h1 className="text-red-500">{React.string("Hello world!")}</h1>
+        <Button variant="default" size="sm">{React.string("Click Me!!")}</Button>
 
         { // Splash screen
             switch (splash) {
