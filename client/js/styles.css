@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+    --background: hsl(38, 77%, 88%);
+    --foreground: hsl(16, 43%, 34%);
+    --primary: hsl(28, 46%, 56%);
+    --primary-foreground: hsl(60, 70%, 90%);
+    --secondary: hsl(39, 100%, 73%);
+    --secondary-foreground: hsl(16, 43%, 34%);
+    --muted: hsl(28, 46%, 56%);
+    --muted-foreground: hsl(16, 43%, 34%);
+    --accent: hsl(39, 100%, 73%);
+    --accent-foreground: hsl(16, 43%, 34%);
+    --destructive: hsl(16, 43%, 34%);
+    --destructive-foreground: hsl(38, 77%, 88%);
+    --border: hsl(28, 46%, 56%);
+    --input: hsl(28, 46%, 56%);
+    --ring: hsl(28, 46%, 56%);
+    --card: hsl(38, 77%, 88%);
+    --card-foreground: (16, 43%, 34%);
+}
+
+.dark {
+    --background: hsl(16, 43%, 34%);
+    --foreground: hsl(38, 77%, 88%);
+    --primary: hsl(28, 46%, 56%);
+    --primary-foreground: hsl(60, 70%, 90%);
+    --secondary: hsl(39, 100%, 73%);
+    --secondary-foreground: hsl(16, 43%, 34%);
+    --muted: hsl(28, 46%, 56%);
+    --muted-foreground: hsl(38, 77%, 88%);
+    --accent: hsl(39, 100%, 52%);
+    --accent-foreground: hsl(16, 43%, 34%);
+    --destructive: hsl(38, 77%, 88%);
+    --destructive-foreground: hsl(16, 43%, 34%);
+    --border: hsl(28, 46%, 56%);
+    --input: hsl(28, 46%, 56%);
+    --ring: hsl(28, 46%, 56%);
+    --card: hsl(16, 43%, 34%);
+    --card-foreground: hsl(38, 77%, 88%);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+}
+
+@layer base {
+
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    * {
+        border-color: var(--color-border);
+    }
+}
+

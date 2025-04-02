@@ -3,6 +3,9 @@ type page =
     | Index of { path: string; children: string list }
 [@@deriving sexp]
 
+(* seperate representation for one specific route. Everyting else uses 
+`page` or `filesystem` *)
+
 type fsData =
     | F of string
     | D of { path: string; children: fsData list }

@@ -2,6 +2,7 @@
   (name shadcn)
   (modes melange)
   (libraries utils reason-react melange.belt)
+  ; (flags :standard -dsource)
   (modules :standard)
   (preprocess 
     (pps melange.ppx reason-react-ppx)))

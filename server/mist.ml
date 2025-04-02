@@ -27,27 +27,6 @@ let rec create_routes fs =
         List.map create_routes children |> List.concat |> List.cons index
 ;;
 
-let main_page =
-    Dream.get "/" (fun _ ->
-        Dream.html
-          {|
-        <!DOCTYPE html>
-        <html lang="en" class="dark">
-            <head>
-                <meta charset="utf-8"/>
-                <title>Mist</title>
-                <script type="module" src="/static/js/main.js"></script>
-            </head>
-            <body>
-                <div id="root" class="root"></div>
-                <link rel="stylesheet" href="/static/styles.css">
-            </body>
-        </html>
-        |})
-;;
-
-let static_js = Dream.get "/static/**" (Dream.static "static/")
-
 let fs_data fs =
     let open Files in
     let open Sexplib in
@@ -60,7 +39,31 @@ let fs_data fs =
 ;;
 
 
-let build_site fs = main_page :: static_js :: (fs_data fs) :: create_routes fs
+let build_site fs = (fs_data fs) :: create_routes fs
+
+let cors_middleware handler req =
+    let open Dream in
+    let origin_opt = Dream.header req "origin" in
+    let origin = Option.value origin_opt ~default:"*" in
+    match method_ req with
+    | `OPTIONS ->
+        print_endline "testing...";
+        respond ~headers:[
+            "Access-Control-Allow-Origin", origin;
+            "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS";
+            "Access-Control-Allow-Headers", "Content-Type, Authorization";
+            "Access-Control-Max-Age", "3600";
+        ] ""
+    | _ ->
+        let response_promise = handler req in
+        Lwt.map (fun response ->
+            match origin_opt with
+            | Some origin ->
+                Dream.add_header response "Access-Control-Allow-Origin" origin;
+                Dream.add_header response "Access-Control-Allow-Credentials" "true";
+                response
+            | None -> response
+        ) response_promise
 
 let () =
     print_endline "";
@@ -68,6 +71,7 @@ let () =
     |> Files.sort_tree
     |> build_site
     |> Dream.router
+    |> cors_middleware
     |> Dream.logger
     |> Dream.run
 ;;

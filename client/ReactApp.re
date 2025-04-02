@@ -1,7 +1,5 @@
 open Pages;
 
-[%%mel.raw "import '../../../../../static/styles.css'"];
-// TODO: Styling
 
 let () =
     switch (ReactDOM.querySelector("#root")) {

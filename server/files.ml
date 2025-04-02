@@ -49,7 +49,7 @@ let render_markdown md =
     Cmarkit_html.of_doc doc ~safe:true
 ;;
 
-let rec build_tree ?(rpath = "api") (path : string) : filesystem =
+let rec build_tree ?(rpath = "fs") (path : string) : filesystem =
     if Sys.is_directory path then
         let child_to_fs child =
             Filename.(concat path child |> build_tree ~rpath:(concat rpath child))

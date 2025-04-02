@@ -1,5 +1,7 @@
 _build/
 dummy-fs/
 build
+build.py
 node_modules/
 static/js/*.js
+.venv

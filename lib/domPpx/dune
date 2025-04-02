@@ -1,0 +1,6 @@
+(library
+  (name ppx_dom_props)
+  (kind ppx_rewriter)
+  (libraries ppxlib reason-react)
+  (preprocess
+    (pps ppxlib.metaquot)))

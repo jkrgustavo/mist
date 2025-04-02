@@ -1,7 +1,7 @@
 (melange.emit 
   (alias react)
   (target output)
-  (libraries sexp utils components pages reason-react melange.belt)
+  (libraries sexp utils pages reason-react melange.belt)
   (modules :standard)
   (module_systems es6)
   (runtime_deps 
